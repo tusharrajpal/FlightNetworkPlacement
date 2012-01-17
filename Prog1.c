@@ -92,5 +92,171 @@ int top;
 		printf("%d",stack[counter]);
 		printf("\n");
 		}
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+PROG 2/question1 part b
+
+
+package stack;
+
+import java.util.Scanner;
+
+class Stack
+{
+	int num[];
+	int tos;
+	
+	public Stack()
+	{
+		num = new int[50];
+		tos=-1;
+	}
+	public void push(int i)
+	{
+		tos++;
+		try
+		{
+			num[tos] = i;
+		}catch(ArrayIndexOutOfBoundsException ae)
+		{
+			System.out.println(ae);
+		}catch(Exception e)
+		{
+			System.out.println(e);
 		}
+	}
+	@SuppressWarnings("finally")
+	public int pop()
+	{
+		int i = -1;
+		try
+		{
+			i = num[tos];
+			tos--;
+		}catch(ArrayIndexOutOfBoundsException ae)
+		{
+			System.out.println(ae);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}finally
+		{
+			return i;
+		}
+	}
+	public int getTos()
+	{
+		return tos;
+	}
+}
+
+public class Prog1 {
+	public static void main(String a[])
+	{
+		Stack s = new Stack();
+		Scanner sd = new Scanner(System.in);
+		int c;
+		int pattern[] = new int[0];
+		int length;
+		while(true)
+		{
+			System.out.println("1.Enter Pattern-");
+			System.out.println("2.Check Pattern-");
+			System.out.println("3.Print Pattern-");
+			System.out.println("4.Exit");
+			
+			System.out.println("Enter Your Choice-");
+			try{
+				c = Integer.parseInt(sd.nextLine());
+			}catch(Exception e)
+			{
+				c=5;
+			}
+			
+			switch(c)
+			{
+				case 1:
+					System.out.println("Enter length of your pattern-");
+					length = sd.nextInt();
+					pattern = new int[length];
+					for(int i = 0; i < length; i++)
+					{
+						pattern[i] = sd.nextInt();
+					}
+					break;
+				case 2:
+					if(s.getTos() == -1 && pattern.length != 0)
+					{
+						int dummy = 1;
+						boolean flag = false;
+						int counter = 1;
+						int temp = pattern[0];
+						
+						while(true)
+						{
+							System.out.println(counter + " " + temp + " " + pattern[counter]);
+							flag = false;
+							while(temp - pattern[counter] == 1 )
+							{
+								temp = pattern[counter];
+								System.out.println(counter + " " + temp + " " + pattern[counter]);
+								counter++;
+								if(counter == pattern.length || counter == (pattern.length-1))
+								{
+									System.out.println("Its Achievable");
+									dummy = 3;
+									break;
+								}
+								flag = true;
+								dummy = 1;
+							}
+							temp = pattern[counter];
+							counter++;
+							if(dummy == 2)
+							{
+								System.out.println("Its not Achievable");
+								break;
+							}
+							if(dummy == 3)
+							{
+								break;
+							}
+							if(flag == false)
+							{
+								dummy++;
+							}
+							else
+							{
+								dummy = 1;
+							}
+						}
+					}
+					break;
+				case 3:
+					try
+					{
+						for(int i = 0; i < pattern.length; i++)
+						{
+							System.out.println(" " + pattern[i]);
+						}
+					}catch(Exception e)
+					{
+						System.out.println(e);
+					}
+					break;
+				case 4:
+					System.exit(0);
+				case 5:
+					break;
+				default:
+					System.out.println("Invalid Input");
+			}
+		}
+	}
+}
+
+		}
+		
 		
