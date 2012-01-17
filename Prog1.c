@@ -259,4 +259,74 @@ public class Prog1 {
 
 		}
 		
+		--------------------------------------------------------------------------------------------
+		
+		
+Program 3 - Game Program
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>	
+
+
+typedef struct node {
+    int data;
+    struct node *next;
+}Link;
+
+Link *first, *last;
+
+
+int startGame(int gap){
+        Link *temp=first;
+        Link *back;
+	int i;
+        while(temp->next!=temp){
+            for(i=2;i<=gap;i++){
+                back=temp;
+                temp=temp->next;
+            }
+            back->next=temp->next;
+            temp=temp->next;
+        }
+        return temp->data;
+    }
+
+void insert(int data){
+        Link *temp= (Link *)malloc(sizeof(Link));
+	temp->data=data;
+        if(first==NULL&&last==NULL){
+            temp->next=last;
+            last=temp;
+            first=temp;
+        }
+        else{
+
+            temp->next=first;
+            first=temp;
+        }
+    }
+
+void makeCricular(){
+        last->next=first;
+}
+
+
+void main() 
+	{
+	int p,g,k;
+        printf("Enter no. of players\t");
+        scanf("%d",&p);
+        printf("Enter gap\t");
+        scanf("%d",&g);
+                for (k = p; k >= 1; k--) {
+                    insert(k);
+                }
+                makeCricular();
+                printf("Winner will be Player %d\n",startGame(g));
+
+}
+
+
+		
 		
